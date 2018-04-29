@@ -2,7 +2,7 @@ package com.example.android.sunshine.data.database;
 
 import java.util.Date;
 
-public class ListViewWeatherEntry {
+public class ListWeatherEntry {
 
     private int id;
     private int weatherIconId;
@@ -10,7 +10,7 @@ public class ListViewWeatherEntry {
     private double min;
     private double max;
 
-    public ListViewWeatherEntry(int id, int weatherIconId, Date date, double min, double max) {
+    public ListWeatherEntry(int id, int weatherIconId, Date date, double min, double max) {
         this.id = id;
         this.weatherIconId = weatherIconId;
         this.date = date;
