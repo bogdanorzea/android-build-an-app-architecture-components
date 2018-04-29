@@ -102,6 +102,9 @@ public class SunshineRepository {
         if (mInitialized) return;
         mInitialized = true;
 
+        // Triggers Sunshine to create its task to synchronize weather data
+        mWeatherNetworkDataSource.scheduleRecurringFetchWeatherSync();
+
         mExecutors.diskIO().execute(() -> {
             if (isFetchNeeded()) startFetchWeatherService();
         });

@@ -41,6 +41,8 @@ public class InjectorUtils {
     }
 
     public static WeatherNetworkDataSource provideNetworkDataSource(Context context) {
+        // Repository needs to exist when the app starts from a service
+        provideRepository(context.getApplicationContext());
         AppExecutors executors = AppExecutors.getInstance();
         return WeatherNetworkDataSource.getInstance(context.getApplicationContext(), executors);
     }
