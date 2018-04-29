@@ -6,23 +6,20 @@ import android.arch.lifecycle.ViewModel;
 import com.example.android.sunshine.data.SunshineRepository;
 import com.example.android.sunshine.data.database.WeatherEntry;
 
-import java.util.Date;
 import java.util.List;
 
 public class MainActivityViewModel extends ViewModel {
 
-    private final Date mDate;
     private SunshineRepository mRepository;
 
     private LiveData<List<WeatherEntry>> mWeatherList;
 
-    public MainActivityViewModel(SunshineRepository repository, Date date) {
+    public MainActivityViewModel(SunshineRepository repository) {
         mRepository = repository;
-        mDate = date;
-        mWeatherList = mRepository.getWeatherListAfterDate(mDate);
+        mWeatherList = mRepository.getCurrentWeatherForecasts();
     }
 
-    public LiveData<List<WeatherEntry>> getWeatherList() {
+    public LiveData<List<WeatherEntry>> getForecast() {
         return mWeatherList;
     }
 }

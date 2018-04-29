@@ -83,10 +83,11 @@ public class SunshineRepository {
         return mWeatherDao.getWeatherByDate(date);
     }
 
-    public LiveData<List<WeatherEntry>> getWeatherListAfterDate(Date date) {
+    public LiveData<List<WeatherEntry>> getCurrentWeatherForecasts() {
         initializeData();
+        Date date = SunshineDateUtils.getNormalizedUtcDateForToday();
 
-        return mWeatherDao.getWeatherAfterDate(date);
+        return mWeatherDao.getCurrentWeatherForecasts(date);
     }
 
     /**

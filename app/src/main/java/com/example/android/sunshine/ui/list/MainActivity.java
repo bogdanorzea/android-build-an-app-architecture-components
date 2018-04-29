@@ -27,7 +27,6 @@ import android.widget.ProgressBar;
 import com.example.android.sunshine.R;
 import com.example.android.sunshine.ui.detail.DetailActivity;
 import com.example.android.sunshine.utilities.InjectorUtils;
-import com.example.android.sunshine.utilities.SunshineDateUtils;
 
 import java.util.Date;
 
@@ -106,14 +105,15 @@ public class MainActivity extends AppCompatActivity implements
         mRecyclerView.setAdapter(mForecastAdapter);
         showLoading();
 
-        Date date = SunshineDateUtils.getNormalizedUtcDateForToday();
-        MainViewModelFactory factory = InjectorUtils.provideMainActivityViewModelFactory(this, date);
+        MainViewModelFactory factory = InjectorUtils.provideMainActivityViewModelFactory(this);
         mViewModel = ViewModelProviders.of(this, factory).get(MainActivityViewModel.class);
-        mViewModel.getWeatherList().observe(this, weatherEntries -> {
-            if (weatherEntries != null && weatherEntries.size() > 0) {
-                mForecastAdapter.swapForecast(weatherEntries);
-                showWeatherDataView();
-            }
+        mViewModel.getForecast().observe(this, weatherEntries -> {
+            mForecastAdapter.swapForecast(weatherEntries);
+            if (mPosition == RecyclerView.NO_POSITION) mPosition = 0;
+            mRecyclerView.smoothScrollToPosition(mPosition);
+
+            if (weatherEntries != null && weatherEntries.size() > 0) showWeatherDataView();
+            else showLoading();
         });
     }
 

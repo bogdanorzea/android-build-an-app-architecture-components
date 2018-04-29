@@ -50,9 +50,9 @@ public class InjectorUtils {
         return new DetailViewModelFactory(repository, date);
     }
 
-    public static MainViewModelFactory provideMainActivityViewModelFactory(Context context, Date date) {
+    public static MainViewModelFactory provideMainActivityViewModelFactory(Context context) {
         SunshineRepository repository = provideRepository(context.getApplicationContext());
-        return new MainViewModelFactory(repository, date);
+        return new MainViewModelFactory(repository);
     }
 
 }
